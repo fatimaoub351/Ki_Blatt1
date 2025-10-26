@@ -557,6 +557,8 @@ Keine weiteren Reduktionen möglich, AC-3 stoppt.
 
 D_v1 = D_v2 = D_v3 = {0,1,2,3}, D_v4 = {0,1,2,3,4,5}
 
+# CSP.04: Forward Checking und Kantenkonsistenz
+
 CSP mit Zuweisung α = {v1 → 2}
 
 1. Vor Kantenkonsistenz
@@ -600,4 +602,6 @@ D1 = {2}, D2 = {1}, D3 = {2}, D4 = {0,1,2,3,4,5}
 4. Vergleich
    
 Kantenkonsistenz und Forward Checking liefern hier das gleiche Ergebnis.
+
+
 
