@@ -28,4 +28,7 @@ Getränke: {Kaffee, Tee, Milch ,Orangensaft }
 
 Zigarettenmarke: {Old-cold-Zigaretten, Kools, Chesterfield, Lucky-Strike, Parliaments }
 
+Tieren: {Hund, Schnecken, Fuchs, Pferd}
+
+
 Tieren: {Hund, Schenken, fuchs, Pferd}
