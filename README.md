@@ -209,8 +209,7 @@ def all_constraints(assignment):
             
     return True
 
-#1 BT_Search Baseline
-
+# 1 BT_Search Baseline
 
 def complete(assignment, csp):
 
@@ -267,7 +266,7 @@ def BT_Search(assignment, csp):
     return 'failure'
 
 
-#2. MRV + Degree Heuristik
+# 2. MRV + Degree Heuristik
 
 def VARIABLES_MRV(csp, assignment):
 
@@ -325,9 +324,8 @@ def BT_Search_MRV(assignment, csp):
             
     return 'failure'
 
- -------------------------
-3. AC-3 Vorpropagation
- -------------------------
+# 3. AC-3 Vorpropagation
+
 def satisfies_constraint(xi, val_xi, xj, val_xj):
 
     # Einfach: keine zwei gleichen Attribute im Haus
