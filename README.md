@@ -435,13 +435,7 @@ print("Lösung:", solution_mrv)
 
 print("Laufzeit: {:.2f} ms\n".format((end-start)*1000))
 
- ->Vergleich : BT_Search lauftzeit 4.59 ms ; BT_Search + MRV+Grad Laufzeit 1176.51 ms 
-
- -> Die Laufzeit des Basis-Algorithmus BT_Search war sehr schnell, da das Problem klein ist und die feste Reihenfolge der Variablen zufällig günstig gewählt wurde. Im 
-
- ->Gegensatz dazu war BT_Search mit MRV- und Gradheuristik deutlich langsamer, da die zusätzlichen Berechnungen für die Heuristiken einen hohen Aufwand verursachen, während
-
- ->die Variablen-Domains durch fehlende Vorpropagation kaum reduziert wurden.
+ ->Vergleich : BT_Search lauftzeit 4.59 ms ; BT_Search + MRV+Grad Laufzeit 1176.51 ms Die Laufzeit des Basis-Algorithmus BT_Search war sehr schnell, da das Problem klein  ist und die feste Reihenfolge der Variablen zufällig günstig gewählt wurde. Im Gegensatz dazu war BT_Search mit MRV- und Gradheuristik deutlich langsamer, da die zusätzlichen Berechnungen für die Heuristiken einen hohen Aufwand verursachen, während die Variablen-Domains durch fehlende Vorpropagation kaum reduziert wurden.
 
 # 3 AC-3 + BT_Search + MRV
 
@@ -492,7 +486,45 @@ if solution_bt:
     
     print("Wem gehört das Zebra?", zebra_besitzer)
 
+# CSP.04: Forward Checking und Kantenkonsistenz 
 
+Vor Kantenkonsistenz: 
+
+D(v1) = {2} → bereits zugewiesen, also nur dieser Wert möglich.
+
+D(v2) = {1,2,3}, D(v3) = {1,2,3} → volle Wertebereiche für unbelegte Variablen.
+
+Nach Kantenkonsistenz: 
+
+D(v1​)={2},
+
+D(v2​)=∅,
+
+D(v3​)={1,2,3}
+
+Nach Forward-Checking: 
+
+D(v1​)={2},
+
+D(v2​)={3},
+
+D(v3​)={1,2,3}
+
+Vergleich: Kantenkonsistenz erkennt die Inkonsistenz sofort (leere Domäne), Forward-Checking noch nicht.
+
+graph TD
+    %% Knoten (Variablen) definieren
+    v1(v1: {0..5})
+    v2(v2: {0..5})
+    v3(v3: {0..5})
+    v4(v4: {0..5})
+    
+    %% Kanten (Constraints) definieren
+    %% -- symbolisiert eine ungerichtete Kante
+    v1 ---|c1: x+y=3| v2
+    v2 ---|c2: x+y<=3| v3
+    v1 ---|c3: x<=y| v3
+    v3 ---|c4: x!=y| v4
 
 
 
