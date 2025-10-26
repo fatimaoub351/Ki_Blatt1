@@ -65,7 +65,7 @@ import random
 import time
 
 
-# 1) Variablen und Domains
+#  Variablen und Domains
 
 houses = [1,2,3,4,5]
 
@@ -266,7 +266,7 @@ def BT_Search(assignment, csp):
     return 'failure'
 
 
-# 2. MRV + Degree Heuristik
+#  MRV + Degree Heuristik
 
 def VARIABLES_MRV(csp, assignment):
 
@@ -324,7 +324,7 @@ def BT_Search_MRV(assignment, csp):
             
     return 'failure'
 
-# 3. AC-3 Vorpropagation
+# AC-3 
 
 def satisfies_constraint(xi, val_xi, xj, val_xj):
 
@@ -369,7 +369,7 @@ def AC3(csp):
     return 'success'
 
 
-# 4 Min-Conflicts Heuristik
+#  Min-Conflicts Heuristik
 
 def min_conflicts(csp, max_steps=10000):
 
@@ -405,7 +405,7 @@ csp_base = {
 }
 
 
-# 8) Experimente
+# Experimente
 
 # 8.1 BT_Search (Basis)
 
@@ -421,7 +421,7 @@ print("Lösung:", solution_bt)
 
 print("Laufzeit: {:.2f} ms\n".format((end-start)*1000))
 
-# 2 BT_Search + MRV+Grad---------------------------------------------------------------
+#  BT_Search + MRV+Grad
 
 start = time.time()
 
@@ -435,15 +435,15 @@ print("Lösung:", solution_mrv)
 
 print("Laufzeit: {:.2f} ms\n".format((end-start)*1000))
 
-# ---> Vergleich : BT_Search lauftzeit 4.59 ms ; BT_Search + MRV+Grad Laufzeit 1176.51 ms 
+ ->Vergleich : BT_Search lauftzeit 4.59 ms ; BT_Search + MRV+Grad Laufzeit 1176.51 ms 
 
-# Die Laufzeit des Basis-Algorithmus BT_Search war sehr schnell, da das Problem klein ist und die feste Reihenfolge der Variablen zufällig günstig gewählt wurde. Im 
+ -> Die Laufzeit des Basis-Algorithmus BT_Search war sehr schnell, da das Problem klein ist und die feste Reihenfolge der Variablen zufällig günstig gewählt wurde. Im 
 
-# Gegensatz dazu war BT_Search mit MRV- und Gradheuristik deutlich langsamer, da die zusätzlichen Berechnungen für die Heuristiken einen hohen Aufwand verursachen, während
+ ->Gegensatz dazu war BT_Search mit MRV- und Gradheuristik deutlich langsamer, da die zusätzlichen Berechnungen für die Heuristiken einen hohen Aufwand verursachen, während
 
-# die Variablen-Domains durch fehlende Vorpropagation kaum reduziert wurden.
+ ->die Variablen-Domains durch fehlende Vorpropagation kaum reduziert wurden.
 
-# -->3 AC-3 + BT_Search + MRV
+# 3 AC-3 + BT_Search + MRV
 
 csp_ac3 = copy.deepcopy(csp_base)
 
@@ -461,7 +461,7 @@ print("Lösung:", solution_ac3)
 
 print("Laufzeit: {:.2f} ms\n".format((end-start)*1000))
 
-# --> vergleich : Laufzeit : 691.44 ms. Etwas schneller als MRV allein, da  AC-3 reduziert manche Domains, bringt aber Vorlaufkosten.
+ --> vergleich : Laufzeit : 691.44 ms. Etwas schneller als MRV allein, da  AC-3 reduziert manche Domains, bringt aber Vorlaufkosten.
 
 4. Min-Conflicts
 
@@ -477,10 +477,10 @@ print("Lösung:", solution_mc)
 
 print("Laufzeit: {:.2f} ms\n".format((end-start)*1000))
 
-# -> Es wurde keine Lösung gefunden (Laufzeit: 5797.90 ms). Der Algorithmus Min-Conflicts ist für stark eingeschränkte CSPs wie dieses ungeeignet, da er leicht in lokalen Minima stecken bleibt und dadurch keine gültige Gesamtlösung findet.
+ -> Es wurde keine Lösung gefunden (Laufzeit: 5797.90 ms). Der Algorithmus Min-Conflicts ist für stark eingeschränkte CSPs wie dieses ungeeignet, da er leicht in lokalen Minima stecken bleibt und dadurch keine gültige Gesamtlösung findet.
 
 
-# -> Wasser- und Zebra-Fragen
+#  Wasser- und Zebra-Fragen
 
 if solution_bt:
 
