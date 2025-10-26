@@ -512,7 +512,8 @@ D(v3​)={1,2,3}
 
 Vergleich: Kantenkonsistenz erkennt die Inkonsistenz sofort (leere Domäne), Forward-Checking noch nicht.
 
-graph TD
+<pre>
+    graph TD
     %% Knoten (Variablen) definieren
     v1(v1: {0..5})
     v2(v2: {0..5})
@@ -525,6 +526,7 @@ graph TD
     v2 ---|c2: x+y<=3| v3
     v1 ---|c3: x<=y| v3
     v3 ---|c4: x!=y| v4
+</pre>
 
 
 
