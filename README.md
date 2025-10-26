@@ -512,22 +512,29 @@ D(v3​)={1,2,3}
 
 Vergleich: Kantenkonsistenz erkennt die Inkonsistenz sofort (leere Domäne), Forward-Checking noch nicht.
 
-<pre>
-    graph TD
+graph TD
     %% Knoten (Variablen) definieren
-    v1(v1: {0..5})
-    v2(v2: {0..5})
-    v3(v3: {0..5})
-    v4(v4: {0..5})
+    v1(v1)
+    v2(v2)
+    v3(v3)
+    v4(v4)
     
-    %% Kanten (Constraints) definieren
-    %% -- symbolisiert eine ungerichtete Kante
-    v1 ---|c1: x+y=3| v2
-    v2 ---|c2: x+y<=3| v3
-    v1 ---|c3: x<=y| v3
-    v3 ---|c4: x!=y| v4
-</pre>
+    %% Gerichtete Bögen (Arc Consistency Arcs) definieren
+    
+    % Constraint c1 (v1, v2): v1 + v2 = 3
+    v1 -- c1: v1+v2=3 --> v2
+    v2 -- c1: v2+v1=3 --> v1
 
+    % Constraint c2 (v2, v3): v2 + v3 <= 3
+    v2 -- c2: v2+v3<=3 --> v3
+    v3 -- c2: v3+v2<=3 --> v2
 
+    % Constraint c3 (v1, v3): v1 <= v3
+    v1 -- c3: v1<=v3 --> v3
+    v3 -- c3: v3>=v1 --> v1
+
+    % Constraint c4 (v3, v4): v3 != v4
+    v3 -- c4: v3!=v4 --> v4
+    v4 -- c4: v4!=v3 --> v3
 
 
