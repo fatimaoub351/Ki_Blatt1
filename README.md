@@ -59,7 +59,9 @@ C12: Der Japaner raucht Zigaretten der Marke Parliaments: Nation = Japaner   ⟺
 CSP.02: Framework für Constraint Satisfaction
 
 import copy
+
 import random
+
 import time
 
 # -------------------------
