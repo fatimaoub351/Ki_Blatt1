@@ -1,0 +1,33 @@
+Blatte 1:
+
+Aufgabe 1:
+
+Variablen:
+
+Für jede Hausposition  𝑖 ∈ { 1,2,3,4,5} 
+
+Farbe : Farbe von Haus i.
+
+Nation: Nationalität des Bewohners von Haus i. 
+
+Gertränke : Getränk im Haus i.
+
+Zigarettenmarke: Zigarettenmarke im Haus i.
+
+Tieren:Haustier im Haus i.
+
+V= Farbe, Nation, Gertränke,  Zigarettenmarke, Tieren.
+
+Wertebereiche:
+
+Farbe : {rot, Grüne, Weiß, Gelb, blau}
+
+Nation: {England, Spanier, ukrainer, Norweger, Japaner}
+
+Getränke: {Kaffee, Tee, Milch ,Orangensaft }
+
+Zigarettenmarke: {Old-cold-Zigaretten, Kools, Chesterfield, Lucky-Strike, Parliaments }
+
+Tieren: {Hund, Schenken, fuchs, Pferd}
+
+
