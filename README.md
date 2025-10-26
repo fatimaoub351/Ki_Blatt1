@@ -486,40 +486,14 @@ if solution_bt:
     
     print("Wem gehört das Zebra?", zebra_besitzer)
 
-# CSP.04: Forward Checking und Kantenkonsistenz 
-
-Vor Kantenkonsistenz: 
-
-D(v1) = {2} → bereits zugewiesen, also nur dieser Wert möglich.
-
-D(v2) = {1,2,3}, D(v3) = {1,2,3} → volle Wertebereiche für unbelegte Variablen.
-
-Nach Kantenkonsistenz: 
-
-D(v1​)={2},
-
-D(v2​)=∅,
-
-D(v3​)={1,2,3}
-
-Nach Forward-Checking: 
-
-D(v1​)={2},
-
-D(v2​)={3},
-
-D(v3​)={1,2,3}
-
-Vergleich: Kantenkonsistenz erkennt die Inkonsistenz sofort (leere Domäne), Forward-Checking noch nicht.
+# CSP.03: Kantenkonsistenz mit AC-3
 
 graph TD
     %% Knoten (Variablen) definieren
     v1(v1)
     v2(v2)
     v3(v3)
-    v4(v4)
-    
-    %% Gerichtete Bögen (Arc Consistency Arcs) definieren
+    v4(v4)  
     
     % Constraint c1 (v1, v2): v1 + v2 = 3
     v1 -- c1: v1+v2=3 --> v2
@@ -537,4 +511,93 @@ graph TD
     v3 -- c4: v3!=v4 --> v4
     v4 -- c4: v4!=v3 --> v3
 
+Gegeben ist ein CSP mit vier Variablen v1, v2, v3, v4, deren Domänen alle bei {0,1,2,3,4,5} starten.
+
+1. Initialisierung
+
+Die Warteschlange Q wird mit allen acht Bögen gefüllt:
+
+(v1, v2),(v2, v1), (v2, v3), (v3, v2), (v1, v3), (v3, v1), (v3, v4), (v4, v3)
+
+# Zyklus 1: Erste Reduktionen
+
+Die stärksten Constraints werden zuerst bearbeitet:
+
+- Bogen (v1, v2>)(v1+v2=3): Werte 4,5 in D1 haben keinen passenden Partner in D2 → entfernt.
+
+  D1 = {0,1,2,3}. Neue Bögen zu Q: (v2,v1), (v3,v1)
+
+- Bogen (v2, v1) (v2+v1=3): Analog, 4,5 aus D2 entfernt.
+
+  D2 = {0,1,2,3}. Neue Bögen: (v1,v2), (v3,v2)
+
+- Bogen (v3, v2) (v3+v2≤3): Werte 4,5 aus D3 entfernt, da keine Partner in D2 existieren.
+
+  D3 = {0,1,2,3}. Neue Bögen: (v2,v3), (v1,v3), (v4,v3)
+
+- Bogen (v3, v1) (v3 ≤ v1): Werte 4,5 aus D3 entfernt, keine Änderung, da D3 bereits reduziert.
+
+Domänen nach Zyklus 1:
+
+D1 = D2 = D3 = {0,1,2,3}, D4 = {0,1,2,3,4,5}
+
+# Zyklus 2: Propagation und Abschluss
+
+Die verbleibenden Bögen werden geprüft:
+
+- (v2,v3) (v2+v3≤3): Domänen konsistent → keine Änderung
+  
+- (v1,v3) (v1 ≤ v3): konsistent → keine Änderung
+  
+- (v3,v4), (v4,v3) (v3 ≠ v4): jedes Element in D3 hat Partner in D4 → keine Änderung
+
+Keine weiteren Reduktionen möglich, AC-3 stoppt.
+
+# Endergebnis :
+
+D_v1 = D_v2 = D_v3 = {0,1,2,3}, D_v4 = {0,1,2,3,4,5}
+
+CSP mit Zuweisung α = {v1 → 2}
+
+1. Vor Kantenkonsistenz
+
+D1 = {2}  (zugewiesen)
+
+D2 = D3 = D4 = {0,1,2,3,4,5}
+
+2. Kantenkonsistenz anwenden
+
+v1 + v2 = 3  → D2 = {1}
+
+v1 ≤ v3      → D3 ≥ 2 → D3 = {2,3,4,5}
+
+v2 + v3 ≤ 3  → D3 ≤ 2 → D3 = {2}
+
+v3 ≤ v1      → D3 ≤ 2 → D3 = {2}
+
+v3 ≠ v4      → keine Änderung → D4 = {0,1,2,3,4,5}
+
+Nach Kantenkonsistenz:
+
+D1 = {2}, D2 = {1}, D3 = {2}, D4 = {0,1,2,3,4,5}
+
+3. Forward Checking
+
+ Prüft Constraints von v1 zu unbelegten Variablen:
+
+  v1 + v2 = 3 → D2 = {1}
+
+  v1 ≤ v3     → D3 ≥ 2
+
+  v2 + v3 ≤ 3 → D3 ≤ 2 → D3 = {2}
+
+  v3 ≠ v4     → keine Änderung → D4 = {0,1,2,3,4,5}
+
+Ergebnis Forward Checking:
+
+D1 = {2}, D2 = {1}, D3 = {2}, D4 = {0,1,2,3,4,5}
+
+4. Vergleich
+   
+Kantenkonsistenz und Forward Checking liefern hier das gleiche Ergebnis.
 
